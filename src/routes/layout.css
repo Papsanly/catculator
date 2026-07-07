@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-family: sans-serif;
+  color-scheme: dark;
+}
+
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+div {
+  display: flex;
+}
+
+button {
+  cursor: pointer;
+  border: unset;
+  width: auto;
+  overflow: visible;
+  background: unset;
+  display: flex;
+}
