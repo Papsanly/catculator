@@ -9,7 +9,6 @@
   viewBox="0 0 24 24"
   stroke="currentColor"
   fill="none"
-  stroke-width="1.7"
   width={size}
   height={size}
   class="lucide lucide-delete-icon lucide-delete"

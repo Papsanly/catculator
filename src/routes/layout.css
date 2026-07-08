@@ -5,8 +5,10 @@
 }
 
 html {
-  font-family: sans-serif;
-  color-scheme: dark;
+  font-family: Archivo;
+  font-weight: 100;
+  color: #282826;
+  background: #ebf1e7;
 }
 
 html,
@@ -23,6 +25,7 @@ div {
 }
 
 button {
+  font: inherit;
   cursor: pointer;
   border: unset;
   width: auto;
