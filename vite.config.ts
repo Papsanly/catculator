@@ -11,6 +11,9 @@ export default defineConfig({
           filename.split(/[/\\]/).includes("node_modules") ? undefined : true,
         experimental: { async: true },
       },
+      paths: {
+        base: process.argv.includes("dev") ? "" : `/${process.env.BASE_PATH}`,
+      },
       adapter: adapter(),
       experimental: { remoteFunctions: true, handleRenderingErrors: true },
     }),
