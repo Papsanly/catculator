@@ -12,6 +12,7 @@
   }: HTMLButtonAttributes & { position?: Position; children: Snippet } = $props();
 
   const radius = "40px";
+  const border = "1px solid #282826";
 </script>
 
 <button
@@ -22,10 +23,10 @@
   style:width="180px"
   style:height="90px"
   style:font-size="42pt"
-  style:border-top="1px solid #282826"
-  style:border-left="1px solid #282826"
-  style:border-bottom={position?.includes("bottom") ? "1px solid #282826" : 0}
-  style:border-right={position?.includes("right") ? "1px solid #282826" : 0}
+  style:border-top={border}
+  style:border-left={border}
+  style:border-bottom={position?.includes("bottom") ? border : 0}
+  style:border-right={position?.includes("right") ? border : 0}
   style:justify-content="center"
   style:align-items="center"
   style:transition-duration="0.3s"
