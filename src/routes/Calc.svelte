@@ -102,7 +102,7 @@
 
 <div
   style:width="544px"
-  style:height="773px"
+  style:height="714px"
   style:flex-direction="column"
   style:align-items="end"
   style:justify-content="end"
