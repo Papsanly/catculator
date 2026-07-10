@@ -48,54 +48,56 @@
     }
   }
 
-  function onclick(action: string) {
-    if (result !== undefined) {
-      numLeft = result.toString();
-      numRight = "";
-      op = undefined;
-      result = undefined;
+  function onDigitClick(digit: string) {
+    if (op) {
+      numRight = appendDigit(numRight, digit);
+    } else {
+      numLeft = appendDigit(numLeft, digit);
     }
-    if (["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(action)) {
-      if (op) {
-        numRight = appendDigit(numRight, action);
-      } else {
-        numLeft = appendDigit(numLeft, action);
-      }
-    } else if (action === "delete") {
-      if (numRight) {
-        numRight = deleteDigit(numRight, false);
-      } else if (op) {
-        op = undefined;
-      } else {
-        numLeft = deleteDigit(numLeft, true);
-      }
-    } else if (action === "clear") {
-      numLeft = "0";
-      numRight = "";
+  }
+
+  function onClear() {
+    numLeft = "0";
+    numRight = "";
+    op = undefined;
+    result = undefined;
+  }
+
+  function onDelete() {
+    if (numRight) {
+      numRight = deleteDigit(numRight, false);
+    } else if (op) {
       op = undefined;
-      result = undefined;
-    } else if (["+", "-", "*", "/"].includes(action)) {
-      if (action === "-" && !op) {
-        if (numLeft === "0") {
-          numLeft = "-0";
-        } else if (numLeft === "-0") {
-          numLeft = "0";
-        } else {
-          op = action as Op;
-        }
+    } else {
+      numLeft = deleteDigit(numLeft, true);
+    }
+  }
+
+  function onOpClick(opClicked: Op) {
+    if (opClicked === "-" && !op) {
+      if (numLeft === "0") {
+        numLeft = "-0";
+      } else if (numLeft === "-0") {
+        numLeft = "0";
       } else {
-        op = action as Op;
+        op = opClicked;
       }
-    } else if (action === "=") {
-      if (op && numRight !== "") {
-        result = calculate(numLeft, numRight, op);
-      }
-    } else if (action === ".") {
-      if (op) {
-        if (numRight && !numRight.includes(".")) numRight += ".";
-      } else {
-        if (!numLeft.includes(".")) numLeft += ".";
-      }
+    } else {
+      op = opClicked;
+    }
+  }
+
+  function onEqualClick() {
+    if (op && numRight !== "") {
+      result = calculate(numLeft, numRight, op);
+    }
+  }
+
+  function onDotClick() {
+    if (op) {
+      if (numRight && !numRight.includes(".")) numRight += ".";
+    } else {
+      if (!numLeft.includes(".")) numLeft += ".";
     }
   }
 </script>
@@ -129,23 +131,23 @@
     style:justify-items="center"
     style:align-items="center"
   >
-    <Key position="top-left" onclick={() => onclick("delete")}><Delete size={70} /></Key>
-    <Key position="top" onclick={() => onclick("clear")}>AC</Key>
-    <Key position="top-right" onclick={() => onclick("+")}>+</Key>
-    <Key position="left" onclick={() => onclick("1")}>1</Key>
-    <Key onclick={() => onclick("2")}>2</Key>
-    <Key position="right" onclick={() => onclick("-")}>-</Key>
-    <Key position="left" onclick={() => onclick("3")}>3</Key>
-    <Key onclick={() => onclick("4")}>4</Key>
-    <Key position="right" onclick={() => onclick("*")}>*</Key>
-    <Key position="left" onclick={() => onclick("5")}>5</Key>
-    <Key onclick={() => onclick("6")}>6</Key>
-    <Key position="right" onclick={() => onclick("/")}>/</Key>
-    <Key position="left" onclick={() => onclick("7")}>7</Key>
-    <Key onclick={() => onclick("8")}>8</Key>
-    <Key position="right" onclick={() => onclick("=")}>=</Key>
-    <Key position="bottom-left" onclick={() => onclick("9")}>9</Key>
-    <Key position="bottom" onclick={() => onclick("0")}>0</Key>
-    <Key position="bottom-right" onclick={() => onclick(".")}>.</Key>
+    <Key position="top-left" onclick={() => onDelete()}><Delete size={70} /></Key>
+    <Key position="top" onclick={() => onClear()}>AC</Key>
+    <Key position="top-right" onclick={() => onOpClick("+")}>+</Key>
+    <Key position="left" onclick={() => onDigitClick("1")}>1</Key>
+    <Key onclick={() => onDigitClick("2")}>2</Key>
+    <Key position="right" onclick={() => onOpClick("-")}>-</Key>
+    <Key position="left" onclick={() => onDigitClick("3")}>3</Key>
+    <Key onclick={() => onDigitClick("4")}>4</Key>
+    <Key position="right" onclick={() => onOpClick("*")}>*</Key>
+    <Key position="left" onclick={() => onDigitClick("5")}>5</Key>
+    <Key onclick={() => onDigitClick("6")}>6</Key>
+    <Key position="right" onclick={() => onOpClick("/")}>/</Key>
+    <Key position="left" onclick={() => onDigitClick("7")}>7</Key>
+    <Key onclick={() => onDigitClick("8")}>8</Key>
+    <Key position="right" onclick={() => onEqualClick()}>=</Key>
+    <Key position="bottom-left" onclick={() => onDigitClick("9")}>9</Key>
+    <Key position="bottom" onclick={() => onDigitClick("0")}>0</Key>
+    <Key position="bottom-right" onclick={() => onDotClick()}>.</Key>
   </div>
 </div>
