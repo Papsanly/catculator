@@ -48,7 +48,17 @@
     }
   }
 
+  function onclick() {
+    if (result !== undefined) {
+      numLeft = result.toString();
+      numRight = "";
+      op = undefined;
+      result = undefined;
+    }
+  }
+
   function onDigitClick(digit: string) {
+    onclick();
     if (op) {
       numRight = appendDigit(numRight, digit);
     } else {
@@ -57,6 +67,7 @@
   }
 
   function onClear() {
+    onclick();
     numLeft = "0";
     numRight = "";
     op = undefined;
@@ -64,6 +75,7 @@
   }
 
   function onDelete() {
+    onclick();
     if (numRight) {
       numRight = deleteDigit(numRight, false);
     } else if (op) {
@@ -74,6 +86,7 @@
   }
 
   function onOpClick(opClicked: Op) {
+    onclick();
     if (opClicked === "-" && !op) {
       if (numLeft === "0") {
         numLeft = "-0";
@@ -88,12 +101,14 @@
   }
 
   function onEqualClick() {
+    onclick();
     if (op && numRight !== "") {
       result = calculate(numLeft, numRight, op);
     }
   }
 
   function onDotClick() {
+    onclick();
     if (op) {
       if (numRight && !numRight.includes(".")) numRight += ".";
     } else {
