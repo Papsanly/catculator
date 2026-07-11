@@ -25,6 +25,8 @@ div {
 }
 
 button {
+  color: inherit;
+  line-height: normal;
   font: inherit;
   cursor: pointer;
   border: unset;
